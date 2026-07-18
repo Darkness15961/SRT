@@ -1,7 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Icon from './UiIcon.vue'
+
+const route = useRoute()
+const router = useRouter()
 const menuOpen = ref(false)
+
+const goToConfig = () => {
+  router.push('/config')
+  menuOpen.value = false
+}
+
+const goToHome = () => {
+  router.push('/')
+  menuOpen.value = false
+}
 </script>
 
 <template>
@@ -9,10 +23,12 @@ const menuOpen = ref(false)
     <div class="mx-auto flex h-full max-w-[1380px] items-center justify-between px-5 sm:max-w-[738px] sm:px-6 lg:max-w-[1390px] lg:px-16">
       <div class="flex items-center gap-5"><img src="/img/logo.png" alt="AppSorteos" class="h-10 w-auto object-contain" /><a class="hidden items-center gap-2 text-[13px] font-semibold sm:flex lg:hidden" href="#"><i class="fa-solid fa-grip"></i> Aplicaciones</a></div>
       <nav class="hidden items-center gap-8 text-[15px] font-semibold text-black lg:flex">
-        <a class="flex items-center gap-2" href="#"><i class="fa-solid fa-grip"></i> Aplicaciones <Icon name="chevron-down" :size="14" /></a>
-        <a href="#">DM Automation</a><span class="-ml-6 rounded bg-[#e8f1ff] px-2 py-1 text-[10px] font-medium text-[#2660b5]">Nuevo</span>
-        <a href="#">Precios</a>
-        <a class="flex items-center gap-2" href="#">Ayuda <Icon name="chevron-down" :size="14" /></a>
+        <button class="flex items-center gap-2" @click="goToHome">
+          <i class="fa-solid fa-rotate-right"></i> Ruleta
+        </button>
+        <button class="flex items-center gap-2" @click="goToConfig">
+          <i class="fa-solid fa-gear"></i> Configuración
+        </button>
       </nav>
       <div class="hidden items-center gap-6 text-[15px] font-semibold lg:flex">
         <button class="hidden sm:block">Ingresar</button>
@@ -26,12 +42,8 @@ const menuOpen = ref(false)
     <transition name="fade"><button v-if="menuOpen" class="fixed inset-0 z-[80] bg-[#263047]/35" aria-label="Cerrar menú" @click="menuOpen=false"></button></transition>
     <transition name="drawer">
       <aside v-if="menuOpen" class="fixed bottom-0 left-0 top-0 z-[90] w-[340px] max-w-[82vw] bg-white pt-20 shadow-2xl">
-        <a class="mobile-link" href="#">DM Automation <span class="rounded bg-[#e8f1ff] px-2 py-1 text-[10px] text-[#2660b5]">Nuevo</span></a>
-        <a class="mobile-link" href="#">Precios</a>
-        <a class="mobile-link" href="#">Ayuda <Icon name="chevron-down" :size="16" /></a>
-        <a class="mobile-link" href="#">Ingresar</a>
-        <div class="border-b px-4 py-3"><button class="rounded-lg bg-[#d81383] px-4 py-2.5 text-[14px] font-bold text-white">Crear cuenta</button></div>
-        <a class="mobile-link" href="#">ES <Icon name="chevron-down" :size="16" /></a>
+        <button class="mobile-link text-left" @click="goToHome">Ruleta</button>
+        <button class="mobile-link text-left" @click="goToConfig">Configuración</button>
       </aside>
     </transition>
   </Teleport>
