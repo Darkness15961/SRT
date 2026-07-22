@@ -50,5 +50,43 @@ const goToHome = () => {
 </template>
 
 <style scoped>
-.hamb{display:flex;width:29px;flex-direction:column;gap:6px}.hamb i{display:block;height:2px;border-radius:2px;background:#777}.mobile-link{display:flex;height:64px;align-items:center;gap:10px;border-bottom:1px solid #ddd;padding:0 16px;font-size:18px;color:#000}.drawer-enter-active,.drawer-leave-active,.fade-enter-active,.fade-leave-active{transition:.25s}.drawer-enter-from,.drawer-leave-to{transform:translateX(-100%)}.fade-enter-from,.fade-leave-to{opacity:0}
+.hamb {
+  display: flex;
+  width: 29px;
+  flex-direction: column;
+  gap: 6px;
+}
+.hamb i {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: #777;
+}
+</style>
+
+<style>
+.mobile-link {
+  display: flex;
+  height: 64px;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 16px;
+  font-size: 18px;
+  color: #000;
+}
+.drawer-enter-active,
+.drawer-leave-active,
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.25s;
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  transform: translateX(-100%);
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -20,9 +20,14 @@ export function useWheelStore() {
   const sort = () => { state.entriesText = [...entries.value].sort((a,b) => a.localeCompare(b)).join('\n') }
   const shuffle = () => { const a = [...entries.value]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); const v=a[i]!; a[i]=a[j]!; a[j]=v} state.entriesText=a.join('\n') }
   const clear = () => { state.entriesText = '' }
+  const removeEntry = (index: number) => {
+    const list = [...entries.value]
+    list.splice(index, 1)
+    state.entriesText = list.join('\n')
+  }
   const save = () => { state.saved.push({ id: Date.now(), name: `Mi Ruleta ${state.saved.length + 1}`, entries: [...entries.value], palette: state.palette, mode: state.mode }) }
   const load = (wheel: SavedWheel) => { state.entriesText=wheel.entries.join('\n'); state.palette=wheel.palette; state.mode=wheel.mode }
   const remove = (id: number) => { state.saved = state.saved.filter(w => w.id !== id) }
-  return { state, entries, sort, shuffle, clear, save, load, remove }
+  return { state, entries, sort, shuffle, clear, removeEntry, save, load, remove }
 }
 export type WheelStore = ReturnType<typeof useWheelStore>

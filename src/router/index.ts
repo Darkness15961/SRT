@@ -13,6 +13,10 @@ const routes = [
     name: 'config',
     component: ConfigView,
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
+  },
 ]
 
 const router = createRouter({
